@@ -3174,9 +3174,19 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
         function getIceServers(connection) {
             var iceServers = [];
 
+	   // iceServers.push(getTURNObj('stun:stun.l.google.com:19032'));
+
             iceServers.push(getTURNObj('stun:14.41.55.87:3478','skyadmin','skyadmin'));
-            iceServers.push(getTURNObj('trun:14.41.55.87:3478','skyadmin','skyadmin'));
-            
+            iceServers.push(getTURNObj('turn:14.41.55.87:3478','skyadmin','skyadmin'));
+	   // iceServers.push(getTURNObj('turn:14.41.55.87:3479','skyadmin','skyadmin'));
+
+            //iceServers.push(getTURNObj('turns:14.41.55.87:3478','skyadmin','skyadmin'));
+ 	   // iceServers.push(getTURNObj('turns:14.41.55.87:3479','skyadmin','skyadmin'));
+
+	    	    
+
+//iceServers.push(getTURNObj('stun:10.70.205.87:3478','skyadmin','skyadmin'));
+	    //iceServers.push(getTURNObj('turn:10.70.205.87:3478','skyadmin','skyadmin'));            
             // iceServers.push(getSTUNObj('stun:stun.l.google.com:19302'));
             //
             // iceServers.push(getTURNObj('stun:webrtcweb.com:7788', 'muazkh', 'muazkh')); // coTURN
