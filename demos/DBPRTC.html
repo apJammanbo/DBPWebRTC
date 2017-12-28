@@ -156,15 +156,22 @@
 
         mediaElement.style.position = "absolute";
 
-        console.log(childrenCount);
         if(childrenCount === 0) {
             mediaElement.style.width = "100%";
             mediaElement.style.height = "100%";
         } else {
-            mediaElement.style.width = "300px";
-            mediaElement.style.height = "250px";
-            mediaElement.style.right = "50px";
-            mediaElement.style.bottom = "50px";
+            let first = connection.videosContainer.children[0];
+            first.style.width = "300px";
+            first.style.height = "250px";
+            first.style.right = "50px";
+            first.style.bottom = "50px";
+            first.style.zIndex = "100";
+
+            mediaElement.style.width = "100%";
+            mediaElement.style.height = "100%";
+            mediaElement.style.right = 0;
+            mediaElement.style.bottom = 0;
+            mediaElement.style.zIndex = "10";
         }
 
         console.log('join');
