@@ -2,8 +2,8 @@
 // MIT License    - www.WebRTC-Experiment.com/licence
 // Documentation  - github.com/muaz-khan/RTCMultiConnection
 
-// Please use HTTPs on non-localhost domains.
-var isUseHTTPs = false;
+// Please use HTTPs on non-10.70.205.87 domains.
+var isUseHTTPs = true;
 
 // var port = 443;
 var port = process.env.PORT || 9001;
@@ -194,7 +194,7 @@ function runServer() {
     app.on('error', function(e) {
         if (e.code == 'EADDRINUSE') {
             if (e.address === '0.0.0.0') {
-                e.address = 'localhost';
+                e.address = '10.70.205.87';
             }
 
             var socketURL = (isUseHTTPs ? 'https' : 'http') + '://' + e.address + ':' + e.port + '/';
@@ -221,7 +221,7 @@ function runServer() {
         var addr = app.address();
 
         if (addr.address === '0.0.0.0') {
-            addr.address = 'localhost';
+            addr.address = '10.70.205.87';
         }
 
         var domainURL = (isUseHTTPs ? 'https' : 'http') + '://' + addr.address + ':' + addr.port + '/';
@@ -236,7 +236,7 @@ function runServer() {
         console.log('Your web-browser (HTML file) MUST set this line:');
         console.log('\x1b[31m%s\x1b[0m ', 'connection.socketURL = "' + domainURL + '";');
 
-        if (addr.address != 'localhost' && !isUseHTTPs) {
+        if (addr.address != '10.70.205.87' && !isUseHTTPs) {
             console.log('Warning:');
             console.log('\x1b[31m%s\x1b[0m ', 'Please set isUseHTTPs=true to make sure audio,video and screen demos can work on Google Chrome as well.');
         }
