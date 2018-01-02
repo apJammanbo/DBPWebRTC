@@ -3175,7 +3175,7 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
             var iceServers = [];
 
             iceServers.push(getTURNObj('stun:14.41.55.87:3478','skyadmin','skyadmin'));
-            iceServers.push(getTURNObj('trun:14.41.55.87:3478','skyadmin','skyadmin'));
+            iceServers.push(getTURNObj('turn:14.41.55.87:3478','skyadmin','skyadmin'));
             
             // iceServers.push(getSTUNObj('stun:stun.l.google.com:19302'));
             //
