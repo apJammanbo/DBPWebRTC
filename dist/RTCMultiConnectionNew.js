@@ -3259,7 +3259,7 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
         currentUserMediaRequest.mutex = true;
 
         // easy way to match
-        var idInstance = JSON.stringify(options.localMediaConstraints);
+        var idInstance = JSON.stringify(options.localMediaConstrainfts);
 
         function streaming(stream, returnBack) {
             setStreamType(options.localMediaConstraints, stream);
