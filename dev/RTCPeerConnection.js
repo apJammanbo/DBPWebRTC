@@ -200,6 +200,7 @@ function PeerInitiator(config) {
             userid: self.userid
         });
 
+
         if (peer && peer.iceConnectionState && peer.iceConnectionState.search(/closed|failed/gi) !== -1 && self.streams instanceof Array) {
             self.streams.forEach(function(stream) {
                 var streamEvent = connection.streamEvents[stream.id] || {
