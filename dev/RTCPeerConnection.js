@@ -199,6 +199,18 @@ function PeerInitiator(config) {
             extra: extra,
             userid: self.userid
         });
+
+        if (peer && peer.iceConnectionState && peer.iceConnectionState.search(/closed|failed/gi) !== -1 && self.streams instanceof Array) {
+            self.streams.forEach(function(stream) {
+                var streamEvent = connection.streamEvents[stream.id] || {
+                    streamid: stream.id,
+                    stream: stream,
+                    type: 'remote'
+                };
+
+                connection.onstreamended(streamEvent);
+            });
+        }
     };
 
     var sdpConstraints = {
