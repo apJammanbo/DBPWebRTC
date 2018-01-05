@@ -3193,7 +3193,6 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
              //iceServers.push(getTURNObj('turn:webrtcweb.com:4455', 'muazkh', 'muazkh')); // restund
             // iceServers.push(getTURNObj('turn:webrtcweb.com:5544?transport=tcp', 'muazkh', 'muazkh')); // restund
 
-
             if (window.RMCExternalIceServers) {
                 iceServers = iceServers.concat(getExtenralIceFormatted());
             } else if (typeof window.getExternalIceServers !== 'undefined' && window.getExternalIceServers == true) {
