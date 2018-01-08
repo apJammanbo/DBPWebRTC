@@ -3174,9 +3174,9 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
         function getIceServers(connection) {
             var iceServers = [];
 
-            iceServers.push(getSTUNObj('stun:14.41.55.87:3478', 'skyadmin', 'skyadmin'));
-            iceServers.push(getTURNObj('turn:14.41.55.87:3478', 'skyadmin', 'skyadmin'));
-            // iceServers.push(getTURNObj('turn:numb.viagenie.ca','khcghost@korea.com','khc2749'));
+            iceServers.push(getTURNObj('stun:14.41.55.87:3478','skyadmin','skyadmin'));
+            iceServers.push(getTURNObj('turn:14.41.55.87:3478','skyadmin','skyadmin'));
+
             // iceServers.push(getSTUNObj('stun:stun.l.google.com:19302'));
             //
             // iceServers.push(getTURNObj('stun:webrtcweb.com:7788', 'muazkh', 'muazkh')); // coTURN
@@ -3259,7 +3259,7 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
         currentUserMediaRequest.mutex = true;
 
         // easy way to match
-        var idInstance = JSON.stringify(options.localMediaConstraints);
+        var idInstance = JSON.stringify(options.localMediaConstrainfts);
 
         function streaming(stream, returnBack) {
             setStreamType(options.localMediaConstraints, stream);
