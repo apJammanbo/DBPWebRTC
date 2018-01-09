@@ -244,9 +244,12 @@
                 localStorage.setItem(connection.socketMessageEvent, roomid);
 
                 // auto-join-room
+                console.log(roomid);
+
                 (function reCheckRoomPresence() {
                     connection.checkPresence(roomid, function(isRoomExists) {
                         if(isRoomExists) {
+                            console.log(roomid);
                             connection.join(roomid);
                             return;
                         }

@@ -194,7 +194,7 @@ function runServer() {
     app.on('error', function(e) {
         if (e.code == 'EADDRINUSE') {
             if (e.address === '0.0.0.0') {
-                e.address = '10.70.205.87';
+                e.address = '10.101.30.153';
             }
 
             var socketURL = (isUseHTTPs ? 'https' : 'http') + '://' + e.address + ':' + e.port + '/';
@@ -221,7 +221,7 @@ function runServer() {
         var addr = app.address();
 
         if (addr.address === '0.0.0.0') {
-            addr.address = '10.70.205.87';
+            addr.address = '10.101.30.153';
         }
 
         var domainURL = (isUseHTTPs ? 'https' : 'http') + '://' + addr.address + ':' + addr.port + '/';
@@ -236,7 +236,7 @@ function runServer() {
         console.log('Your web-browser (HTML file) MUST set this line:');
         console.log('\x1b[31m%s\x1b[0m ', 'connection.socketURL = "' + domainURL + '";');
 
-        if (addr.address != '10.70.205.87' && !isUseHTTPs) {
+        if (addr.address != '10.101.30.153' && !isUseHTTPs) {
             console.log('Warning:');
             console.log('\x1b[31m%s\x1b[0m ', 'Please set isUseHTTPs=true to make sure audio,video and screen demos can work on Google Chrome as well.');
         }

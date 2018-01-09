@@ -1,7 +1,7 @@
 // __________________
 // getHTMLMediaElement.js
 
-function getMediaElement(mediaElement, config, count) {
+function getMediaElement(mediaElement, config) {
     config = config || {};
 
     if (!mediaElement.nodeName || (mediaElement.nodeName.toLowerCase() != 'audio' && mediaElement.nodeName.toLowerCase() != 'video')) {

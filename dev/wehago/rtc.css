@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,img,button,select{margin:0;padding:0}
+body,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,button{font-family:'Nanum Square','돋움',Dotum,Helvetica,'Apple SD Gothic Neo',sans-serif}
+body{-webkit-text-size-adjust:none}
+img,fieldset{border:0;vertical-align:top}
+a{color:#1a1a1a}
+em,address{font-style:normal}
+ul,ol,li{list-style:none}
+label,button{cursor:pointer}
+input::-ms-clear{display:none}
+.blind{position:absolute !important;clip:rect(0 0 0 0) !important;width:1px !important;height:1px !important;margin:-1px !important;overflow:hidden !important}
+.clearbx:after,.clearfix:after{content:'';clear:both;display:table}
+.ellipsis{overflow:hidden;white-space:nowrap;word-break:break-all;text-overflow:ellipsis}
+.no_ellipsis{white-space:normal !important}
+.us_none{-webkit-user-select:none !important;-moz-user-select:none !important;-ms-user-select:none !important;user-select:none !important}
+input:disabled{-webkit-text-fill-color:#8d8d8d;opacity:1}
+iframe{overflow:hidden;margin:0;padding:0;border:0}
+* {box-sizing:border-box;}
+
+/* 크롬 디폴트 radius값 초기화 */
+input[type="button" i], input[type="submit" i], input[type="reset" i], input[type="file" i]::-webkit-file-upload-button, button{border-radius:0}
+
+.wrap,.video_area,.main_frame {position:absolute;top:0;right:0;bottom:0;left:0;}
+.video_area {position:relative;height:100%;box-sizing:border-box;}
+.sub_frame {position:absolute;bottom:10px;left:0;right:0;height:200px;padding:0 20px;text-align:right;font-size:0;}
+.sub_frame .item {position:relative;display:inline-block;width:25%;height:200px;padding: 10px;}
+.sub_frame .btn_arrow {position:absolute;top:0;height:100%;}
+.sub_frame .btn_prev {left:0;}
+.sub_frame .btn_next {right:0;}
+
+
+
