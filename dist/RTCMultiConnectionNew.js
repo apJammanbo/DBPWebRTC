@@ -3173,28 +3173,10 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
     var IceServersHandler = (function() {
         function getIceServers(connection) {
             var iceServers = [];
-
-            iceServers.push(getSTUNObj('stun:stun.l.google.com:19302'));
-
+            
             iceServers.push(getTURNObj('stun:14.41.55.87:3478','skyadmin','skyadmin'));
             iceServers.push(getTURNObj('turn:14.41.55.87:3478','skyadmin','skyadmin'));
             iceServers.push(getTURNObj('turn:14.41.55.87:3478?transport=tcp','skyadmin','skyadmin'));
-
-            // iceServers.push(getSTUNObj('stun:stun.l.google.com:19302'));
-            //
-            // iceServers.push(getTURNObj('stun:webrtcweb.com:7788', 'muazkh', 'muazkh')); // coTURN
-            // iceServers.push(getTURNObj('turn:webrtcweb.com:7788', 'muazkh', 'muazkh')); // coTURN
-            // iceServers.push(getTURNObj('turn:webrtcweb.com:8877', 'muazkh', 'muazkh')); // coTURN
-            //
-            // iceServers.push(getTURNObj('turns:webrtcweb.com:7788', 'muazkh', 'muazkh')); // coTURN
-            // iceServers.push(getTURNObj('turns:webrtcweb.com:8877', 'muazkh', 'muazkh')); // coTURN
-            //
-            // // iceServers.push(getTURNObj('turn:webrtcweb.com:3344', 'muazkh', 'muazkh')); // resiprocate
-            // // iceServers.push(getTURNObj('turn:webrtcweb.com:4433', 'muazkh', 'muazkh')); // resiprocate
-            //
-            // iceServers.push(getTURNObj('stun:webrtcweb.com:4455', 'muazkh', 'muazkh')); // restund
-            // iceServers.push(getTURNObj('turn:webrtcweb.com:4455', 'muazkh', 'muazkh')); // restund
-            // iceServers.push(getTURNObj('turn:webrtcweb.com:5544?transport=tcp', 'muazkh', 'muazkh')); // restund
 
             if (window.RMCExternalIceServers) {
                 iceServers = iceServers.concat(getExtenralIceFormatted());
