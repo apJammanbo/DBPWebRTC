@@ -3175,9 +3175,9 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
             var iceServers = [];
 
             iceServers.push(getSTUNObj('stun:stun.l.google.com:19302'));
-            iceServers.push(getTURNObj('stun:14.41.55.98:3478','skyadmin','skyadmin'));
-            iceServers.push(getTURNObj('turn:14.41.55.98:3478','skyadmin','skyadmin'));
-            iceServers.push(getTURNObj('turn:14.41.55.98:3478?transport=tcp','skyadmin','skyadmin'));
+            iceServers.push(getTURNObj('stun:turn.wehago.com:3478','skyadmin','skyadmin'));
+            iceServers.push(getTURNObj('turn:turn.wehago.com:3478','skyadmin','skyadmin'));
+            iceServers.push(getTURNObj('turn:turn.wehago.com:3478?transport=tcp','skyadmin','skyadmin'));
 
             if (window.RMCExternalIceServers) {
                 iceServers = iceServers.concat(getExtenralIceFormatted());
