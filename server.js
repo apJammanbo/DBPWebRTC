@@ -3,10 +3,10 @@
 // Documentation  - github.com/muaz-khan/RTCMultiConnection
 
 // Please use HTTPs on non-10.70.205.87 domains.
-var isUseHTTPs = true;
+var isUseHTTPs = false;
 
-var port = 443;
-//var port = process.env.PORT || 9001;
+//var port = 443;
+var port = process.env.PORT || 9001;
 
 var fs = require('fs');
 var path = require('path');
@@ -14,8 +14,8 @@ var path = require('path');
 // see how to use a valid certificate:
 // https://github.com/muaz-khan/WebRTC-Experiment/issues/62
 var options = {
-    key: fs.readFileSync(path.join(__dirname, 'fake-keys/privatekey.pem')),
-    cert: fs.readFileSync(path.join(__dirname, 'fake-keys/certificate.pem'))
+   // key: fs.readFileSync(path.join(__dirname, 'fake-keys/privatekey.pem')),
+   // cert: fs.readFileSync(path.join(__dirname, 'fake-keys/certificate.pem'))
 };
 
 // force auto reboot on failures
@@ -26,7 +26,7 @@ var autoRebootServerOnFailure = false;
 try {
     var config = require('./config.json');
 
-    if ((config.port || '').toString() !== '443') {
+    if ((config.port || '').toString() !== '9001') {
         port = parseInt(config.port);
     }
 
@@ -204,7 +204,7 @@ function runServer() {
             console.log('\x1b[31m%s\x1b[0m ', socketURL + ' is already in use. Please kill below processes using "kill PID".');
             console.log('------------------------------');
 
-            foo = new cmd_exec('lsof', ['-n', '-i4TCP:443'],
+            foo = new cmd_exec('lsof', ['-n', '-i4TCP:9001'],
                 function(me, data) {
                     me.stdout += data.toString();
                 },
