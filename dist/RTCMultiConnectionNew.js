@@ -3174,8 +3174,7 @@ window.RTCMultiConnection = function(roomid, forceOptions) {
         function getIceServers(connection) {
             var iceServers = [];
 
-            iceServers.push(getSTUNObj('stun:stun.l.google.com:19302'));
-            iceServers.push(getTURNObj('stun:turn.wehago.com:3478','skyadmin','skyadmin'));
+            iceServers.push(getSTUNObj('stun:turn.wehago.com:3478'));
             iceServers.push(getTURNObj('turn:turn.wehago.com:3478','skyadmin','skyadmin'));
             iceServers.push(getTURNObj('turn:turn.wehago.com:3478?transport=tcp','skyadmin','skyadmin'));
 
