@@ -83,28 +83,29 @@ connection.onstream = function(event) {
     mediaElement.id = event.streamid;
     mediaElement.ondblclick = containerDoubleClick;
 
+    window.onresize = (event) => {
+        let length = Math.min(document.body.clientWidth, document.body.clientHeight);
+        inbx.style.width = length+ "px";
+        inbx.style.height = length+ "px";
+        inbx.style.top = "50%";
+        inbx.style.marginTop = -(length / 2) + "px";
+
+    };
 
     if(mainIndex === -1) {
+
         // 처음 접속(페이지 진입이면..)
+        let length = Math.min(document.body.clientWidth, document.body.clientHeight);
+        inbx.style.width = length+ "px";
+        inbx.style.height = length+ "px";
+        inbx.style.top = "50%";
+        inbx.style.marginTop = -(length / 2) + "px";
 
-
+        mediaElement.style.width = "100%";
+        mediaElement.style.height = "100%";
 
         inbx.appendChild(mediaElement);
 
-        mediaElement.addEventListener('onresize', function(){
-            console.log("#%%%%")
-        });
-
-        if (document.body.clientWidth > document.body.clientHeight) { //가로가 길 때
-            console.log("##",  document.body.clientHeight)
-            mediaElement.style.width = document.body.clientHeight;
-            mediaElement.style.height = document.body.clientHeight;
-        } else {
-
-            mediaElement.style.width = "100%";
-            mediaElement.style.height = document.body.clientWidth;
-        }
-        //mainFrame.appendChild(mediaElement);
         mainIndex = 0;
     } else {
         mediaElement.style.width = "100%";
