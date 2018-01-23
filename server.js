@@ -2,11 +2,11 @@
 // MIT License    - www.WebRTC-Experiment.com/licence
 // Documentation  - github.com/muaz-khan/RTCMultiConnection
 
-// Please use HTTPs on non-14.41.55.87 domains.
+// Please use HTTPs on non-localhost domains.
 var isUseHTTPs = true;
 
-// var port = 443;
-var port = process.env.PORT || 443;
+// var port = 9001;
+var port = process.env.PORT || 9001;
 
 var fs = require('fs');
 var path = require('path');
@@ -26,7 +26,7 @@ var autoRebootServerOnFailure = false;
 try {
     var config = require('./config.json');
 
-    if ((config.port || '').toString() !== '443') {
+    if ((config.port || '').toString() !== '9001') {
         port = parseInt(config.port);
     }
 
@@ -194,7 +194,7 @@ function runServer() {
     app.on('error', function(e) {
         if (e.code == 'EADDRINUSE') {
             if (e.address === '0.0.0.0') {
-                e.address = '14.41.55.87';
+                e.address = 'localhost';
             }
 
             var socketURL = (isUseHTTPs ? 'https' : 'http') + '://' + e.address + ':' + e.port + '/';
@@ -204,7 +204,7 @@ function runServer() {
             console.log('\x1b[31m%s\x1b[0m ', socketURL + ' is already in use. Please kill below processes using "kill PID".');
             console.log('------------------------------');
 
-            foo = new cmd_exec('lsof', ['-n', '-i4TCP:443'],
+            foo = new cmd_exec('lsof', ['-n', '-i4TCP:9001'],
                 function(me, data) {
                     me.stdout += data.toString();
                 },
@@ -221,7 +221,7 @@ function runServer() {
         var addr = app.address();
 
         if (addr.address === '0.0.0.0') {
-            addr.address = '14.41.55.87';
+            addr.address = 'localhost';
         }
 
         var domainURL = (isUseHTTPs ? 'https' : 'http') + '://' + addr.address + ':' + addr.port + '/';
@@ -236,7 +236,7 @@ function runServer() {
         console.log('Your web-browser (HTML file) MUST set this line:');
         console.log('\x1b[31m%s\x1b[0m ', 'connection.socketURL = "' + domainURL + '";');
 
-        if (addr.address != '14.41.55.87' && !isUseHTTPs) {
+        if (addr.address != 'localhost' && !isUseHTTPs) {
             console.log('Warning:');
             console.log('\x1b[31m%s\x1b[0m ', 'Please set isUseHTTPs=true to make sure audio,video and screen demos can work on Google Chrome as well.');
         }

@@ -25,7 +25,7 @@ input[type="button" i], input[type="submit" i], input[type="reset" i], input[typ
 .video_area {position:relative;height:100%;box-sizing:border-box;background-color:#000}
 .video_area .user {overflow:hidden;position:absolute;top:10px;left:10px;width:90%;text-shadow:2px 2px red;font-size:14px;text-align:left;text-overflow:ellipsis;white-space:nowrap;color:#fff;z-index:100;}
 .main_frame {}
-.main_frame .inbx {position:relative;width:75%;height:100%;margin:0 auto;}
+.main_frame .inbx {position:relative;height:100%;margin:0 auto;}
 .sub_frame {position:absolute;bottom:20px;left:0;right:0;padding:0 20px;text-align:center;font-size:0;}
 .sub_frame .item {position:relative;display:inline-block;width:20%;max-width:200px;height:150px;}
 .sub_frame .item .inbx {margin:0 10px;}

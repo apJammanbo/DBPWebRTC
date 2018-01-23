@@ -69,7 +69,6 @@ containerDoubleClick = (event) => {
 
 // 자신 혹은 상대방이 접속할때 발생하는 이벤트
 connection.onstream = function(event) {
-
     // 메인 프레임 큰화면 태그를 가져온다.
     let mainFrame = document.getElementById('main_frame');
     let subFrame = document.getElementById('sub_frame');
@@ -79,18 +78,38 @@ connection.onstream = function(event) {
     var mediaElement = getMediaElement(event.mediaElement, {});
     videoContainers.push(mediaElement);
 
-    mediaElement.style.width = "100%";
-    mediaElement.style.height = "100%";
+    // mediaElement.style.width = "100%";
+    // mediaElement.style.height = "100%";
     mediaElement.id = event.streamid;
     mediaElement.ondblclick = containerDoubleClick;
 
 
     if(mainIndex === -1) {
         // 처음 접속(페이지 진입이면..)
+
+
+
         inbx.appendChild(mediaElement);
+
+        mediaElement.addEventListener('onresize', function(){
+            console.log("#%%%%")
+        });
+
+        if (document.body.clientWidth > document.body.clientHeight) { //가로가 길 때
+            console.log("##",  document.body.clientHeight)
+            mediaElement.style.width = document.body.clientHeight;
+            mediaElement.style.height = document.body.clientHeight;
+        } else {
+
+            mediaElement.style.width = "100%";
+            mediaElement.style.height = document.body.clientWidth;
+        }
         //mainFrame.appendChild(mediaElement);
         mainIndex = 0;
     } else {
+        mediaElement.style.width = "100%";
+        mediaElement.style.height = "100%";
+
         var item = document.createElement('div');
         item.className = "item";
 
