@@ -6,7 +6,7 @@
 var isUseHTTPs = false;
 
 //var port = 443;
-var port = process.env.PORT || 9001;
+var port = process.env.PORT || 443;
 
 var fs = require('fs');
 var path = require('path');
@@ -26,7 +26,7 @@ var autoRebootServerOnFailure = false;
 try {
     var config = require('./config.json');
 
-    if ((config.port || '').toString() !== '9001') {
+    if ((config.port || '').toString() !== '443') {
         port = parseInt(config.port);
     }
 
@@ -204,7 +204,7 @@ function runServer() {
             console.log('\x1b[31m%s\x1b[0m ', socketURL + ' is already in use. Please kill below processes using "kill PID".');
             console.log('------------------------------');
 
-            foo = new cmd_exec('lsof', ['-n', '-i4TCP:9001'],
+            foo = new cmd_exec('lsof', ['-n', '-i4TCP:443'],
                 function(me, data) {
                     me.stdout += data.toString();
                 },
