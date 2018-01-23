@@ -2,11 +2,28 @@
 // MIT License    - www.WebRTC-Experiment.com/licence
 // Documentation  - github.com/muaz-khan/RTCMultiConnection
 
-// Please use HTTPs on non-10.70.205.87 domains.
+function resolveURL(url) {
+    var isWin = !!process.platform.match(/^win/);
+    if (!isWin) return url;
+    return url.replace(/\//g, '\\');
+}
+
+// Please use HTTPs on non-localhost domains.
+var isLocal = true;
 var isUseHTTPs = false;
 
-// var port = 9001;
+// var port = 443;
 var port = process.env.PORT || 9001;
+
+try {
+    process.argv.forEach(function(val, index, array) {
+        if (!val) return;
+
+        if (val === '--ssl') {
+            isUseHTTPs = true;
+        }
+    });
+} catch (e) {}
 
 var fs = require('fs');
 var path = require('path');
@@ -14,8 +31,8 @@ var path = require('path');
 // see how to use a valid certificate:
 // https://github.com/muaz-khan/WebRTC-Experiment/issues/62
 var options = {
-    key: fs.readFileSync(path.join(__dirname, 'fake-keys/privatekey.pem')),
-    cert: fs.readFileSync(path.join(__dirname, 'fake-keys/certificate.pem'))
+    key: fs.readFileSync(path.join(__dirname, resolveURL('fake-keys/privatekey.pem'))),
+    cert: fs.readFileSync(path.join(__dirname, resolveURL('fake-keys/certificate.pem')))
 };
 
 // force auto reboot on failures
@@ -24,7 +41,7 @@ var autoRebootServerOnFailure = false;
 
 // skip/remove this try-catch block if you're NOT using "config.json"
 try {
-    var config = require('./config.json');
+    var config = require(resolveURL('./config.json'));
 
     if ((config.port || '').toString() !== '9001') {
         port = parseInt(config.port);
@@ -54,6 +71,10 @@ function serverHandler(request, response) {
             return;
         }
 
+        if (filename && filename.indexOf('Video-Broadcasting.html') !== -1) {
+            filename = filename.replace('Video-Broadcasting.html', 'video-broadcasting.html');
+        }
+
         var stats;
 
         try {
@@ -81,19 +102,30 @@ function serverHandler(request, response) {
                 'Content-Type': 'text/html'
             });
 
-            if (filename.indexOf('/demos/MultiRTC/') !== -1) {
-                filename = filename.replace('/demos/MultiRTC/', '');
-                filename += '/demos/MultiRTC/index.html';
-            } else if (filename.indexOf('/demos/') !== -1) {
-                filename = filename.replace('/demos/', '');
-                filename += '/demos/index.html';
+            if (filename.indexOf(resolveURL('/demos/MultiRTC/')) !== -1) {
+                filename = filename.replace(resolveURL('/demos/MultiRTC/'), '');
+                filename += resolveURL('/demos/MultiRTC/index.html');
+            } else if (filename.indexOf(resolveURL('/demos')) !== -1) {
+                filename = filename.replace(resolveURL('/demos/'), '');
+                filename = filename.replace(resolveURL('/demos'), '');
+                filename += resolveURL('/demos/index.html');
             } else {
-                filename += '/demos/index.html';
+                filename += resolveURL('/demos/index.html');
             }
         }
 
+        var contentType = 'text/plain';
+        if (filename.toLowerCase().indexOf('.html') !== -1) {
+            contentType = 'text/html';
+        }
+        if (filename.toLowerCase().indexOf('.css') !== -1) {
+            contentType = 'text/css';
+        }
+        if (filename.toLowerCase().indexOf('.png') !== -1) {
+            contentType = 'image/png';
+        }
 
-        fs.readFile(filename, 'utf8', function(err, file) {
+        fs.readFile(filename, 'binary', function(err, file) {
             if (err) {
                 response.writeHead(500, {
                     'Content-Type': 'text/plain'
@@ -141,8 +173,10 @@ function serverHandler(request, response) {
                 }
             } catch (e) {}
 
-            response.writeHead(200);
-            response.write(file, 'utf8');
+            response.writeHead(200, {
+                'Content-Type': contentType
+            });
+            response.write(file, 'binary');
             response.end();
         });
     } catch (e) {
@@ -194,7 +228,7 @@ function runServer() {
     app.on('error', function(e) {
         if (e.code == 'EADDRINUSE') {
             if (e.address === '0.0.0.0') {
-                e.address = '10.70.205.87';
+                e.address = isLocal ? 'localhost' : '10.70.205.87';
             }
 
             var socketURL = (isUseHTTPs ? 'https' : 'http') + '://' + e.address + ':' + e.port + '/';
@@ -221,7 +255,7 @@ function runServer() {
         var addr = app.address();
 
         if (addr.address === '0.0.0.0') {
-            addr.address = '10.70.205.87';
+            addr.address = isLocal ? 'localhost' : '10.70.205.87';
         }
 
         var domainURL = (isUseHTTPs ? 'https' : 'http') + '://' + addr.address + ':' + addr.port + '/';
@@ -231,12 +265,15 @@ function runServer() {
         console.log('socket.io is listening at:');
         console.log('\x1b[31m%s\x1b[0m ', '\t' + domainURL);
 
-        console.log('\n');
+        if (!isUseHTTPs) {
+            console.log('use --ssl to enable HTTPs:');
+            console.log('\x1b[31m%s\x1b[0m ', '\t' + 'node server.js --ssl');
+        }
 
         console.log('Your web-browser (HTML file) MUST set this line:');
         console.log('\x1b[31m%s\x1b[0m ', 'connection.socketURL = "' + domainURL + '";');
 
-        if (addr.address != '10.70.205.87' && !isUseHTTPs) {
+        if ((addr.address = isLocal ? 'localhost' : '10.70.205.87') != 'localhost' && !isUseHTTPs) {
             console.log('Warning:');
             console.log('\x1b[31m%s\x1b[0m ', 'Please set isUseHTTPs=true to make sure audio,video and screen demos can work on Google Chrome as well.');
         }
