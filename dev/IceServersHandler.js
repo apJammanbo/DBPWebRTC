@@ -85,10 +85,10 @@ var IceServersHandler = (function() {
     function getIceServers(connection) {
         var iceServers = [];
 
-        iceServers.push(getTURNObj('stun:14.41.55.87:3478','skyadmin','skyadmin'));
-        iceServers.push(getTURNObj('trun:14.41.55.87:3478','skyadmin','skyadmin'));
-        
-        // iceServers.push(getSTUNObj('stun:stun.l.google.com:19302'));
+        iceServers.push(getSTUNObj('stun:turn.wehago.com:3478'));
+        iceServers.push(getTURNObj('turn:turn.wehago.com:3478','skyadmin','skyadmin'));
+        iceServers.push(getTURNObj('turn:turn.wehago.com:3478?transport=tcp','skyadmin','skyadmin'));
+
         //
         // iceServers.push(getTURNObj('stun:webrtcweb.com:7788', 'muazkh', 'muazkh')); // coTURN
         // iceServers.push(getTURNObj('turn:webrtcweb.com:7788', 'muazkh', 'muazkh')); // coTURN
