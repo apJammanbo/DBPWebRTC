@@ -54,6 +54,19 @@ containerDoubleClick = (event) => {
             let beforeSub = subFrame.children[i].children[0];
             subFrame.children[i].removeChild(subFrame.children[i].children[0]);
 
+            //기존 서브프레임에 스타일 속성 수정
+            let length = Math.min(document.body.clientWidth, document.body.clientHeight);
+            beforeSub.style.width = length+ "px";
+            beforeSub.style.height = length+ "px";
+            beforeSub.style.top = "50%";
+            beforeSub.style.marginTop = -(length / 2) + "px";
+
+            //기존 메인프레임에 스타일 속성 수정
+            beforeMain.style.width = "";
+            beforeMain.style.height = "";
+            beforeMain.style.top = "";
+            beforeMain.style.marginTop = "";
+
             // 기존 서브프레임의 비디오를 메인프레임으로 올린다.
             mainFrame.appendChild(beforeSub);
             subFrame.children[i].appendChild(beforeMain);
@@ -145,7 +158,6 @@ connection.onstream = function(event) {
 };
 
 connection.onstreamended = function(event) {
-    console.log("end")
     // 서브 프레임에서 접속종료한 컴포넌트를 제거한다.
     let subFrame = document.getElementById('sub_frame');
     for(var i = 0 ; i < subFrame.children.length; ++i) {
@@ -159,9 +171,16 @@ connection.onstreamended = function(event) {
     // 서브 프레임에서 제거되지 않았다면 메인프레임에서 제거한다.
     let mainFrame = document.getElementById('main_frame');
     if(mainFrame.children[0].children[0].id === event.streamid) {
-        console.log(2)
         mainFrame.removeChild(mainFrame.children[0]);
-        mainFrame.appendChild(subFrame.children[0].children[0]);
+
+        let sub = subFrame.children[0].children[0];
+        let length = Math.min(document.body.clientWidth, document.body.clientHeight);
+        sub.style.width = length+ "px";
+        sub.style.height = length+ "px";
+        sub.style.top = "50%";
+        sub.style.marginTop = -(length / 2) + "px";
+
+        mainFrame.appendChild(sub);
         subFrame.removeChild(subFrame.children[0]);
         setTimeout(function () {
             mainFrame.children[0].children[0].media.play();
