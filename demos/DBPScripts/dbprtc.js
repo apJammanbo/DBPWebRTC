@@ -67,6 +67,35 @@ containerDoubleClick = (event) => {
     }
 }
 
+resizeVideo = (inbx) => {
+    // 기준을 잡는다(가로인지 세로인지)
+    let mainFrame = document.getElementById('main_frame');
+    let width = mainFrame.clientWidth;
+    let height = mainFrame.clientHeight;
+
+    console.log(width);
+    console.log(height);
+
+
+    if(width / 4 > (height / 3)) {
+        // 세로가 기준이다.
+        console.log('height');
+        inbx.style.width = ((height / 3) * 4) + "px";
+        inbx.style.height = height + "px";
+        inbx.style.top = "50%";
+        inbx.style.marginTop = -(height / 2) + "px";
+
+    } else {
+        // 가로가 기준이다.
+        console.log('width');
+        console.log(width);
+        inbx.style.width = width + "px";
+        inbx.style.height = ((width / 4) * 3) + "px";
+        inbx.style.top = "50%";
+        inbx.style.marginTop = -(((width / 4) * 3) / 2) + "px";
+    }
+}
+
 // 자신 혹은 상대방이 접속할때 발생하는 이벤트
 connection.onstream = function(event) {
     // 메인 프레임 큰화면 태그를 가져온다.
@@ -84,22 +113,11 @@ connection.onstream = function(event) {
     mediaElement.ondblclick = containerDoubleClick;
 
     window.onresize = (event) => {
-        let length = Math.min(document.body.clientWidth, document.body.clientHeight);
-        inbx.style.width = length+ "px";
-        inbx.style.height = length+ "px";
-        inbx.style.top = "50%";
-        inbx.style.marginTop = -(length / 2) + "px";
-
+        resizeVideo(inbx);
     };
 
     if(mainIndex === -1) {
-
-        // 처음 접속(페이지 진입이면..)
-        let length = Math.min(document.body.clientWidth, document.body.clientHeight);
-        inbx.style.width = length+ "px";
-        inbx.style.height = length+ "px";
-        inbx.style.top = "50%";
-        inbx.style.marginTop = -(length / 2) + "px";
+        resizeVideo(inbx);
 
         mediaElement.style.width = "100%";
         mediaElement.style.height = "100%";
