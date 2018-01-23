@@ -55,11 +55,7 @@ containerDoubleClick = (event) => {
             subFrame.children[i].removeChild(subFrame.children[i].children[0]);
 
             //기존 서브프레임에 스타일 속성 수정
-            let length = Math.min(document.body.clientWidth, document.body.clientHeight);
-            beforeSub.style.width = length+ "px";
-            beforeSub.style.height = length+ "px";
-            beforeSub.style.top = "50%";
-            beforeSub.style.marginTop = -(length / 2) + "px";
+            resizeVideo(beforeSub);
 
             //기존 메인프레임에 스타일 속성 수정
             beforeMain.style.width = "";
@@ -181,7 +177,6 @@ connection.onstreamended = function(event) {
     for(var i = 0 ; i < subFrame.children.length; ++i) {
         // 서브 프레임을 돌면서 로그아웃된 컨테이너를 찾는다.
         if(subFrame.children[i].children[0].children[0].id === event.streamid) {
-            console.log(1)
             subFrame.removeChild(subFrame.children[i]);
             return;
         }
@@ -192,11 +187,7 @@ connection.onstreamended = function(event) {
         mainFrame.removeChild(mainFrame.children[0]);
 
         let sub = subFrame.children[0].children[0];
-        let length = Math.min(document.body.clientWidth, document.body.clientHeight);
-        sub.style.width = length+ "px";
-        sub.style.height = length+ "px";
-        sub.style.top = "50%";
-        sub.style.marginTop = -(length / 2) + "px";
+        resizeVideo(sub);
 
         mainFrame.appendChild(sub);
         subFrame.removeChild(subFrame.children[0]);
