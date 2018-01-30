@@ -9,7 +9,7 @@ function resolveURL(url) {
 }
 
 // Please use HTTPs on non-localhost domains.
-var isLocal = true;
+var isLocal = false;
 var isUseHTTPs = false;
 
 // var port = 443;
