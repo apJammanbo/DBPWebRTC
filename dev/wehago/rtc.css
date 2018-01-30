@@ -23,17 +23,28 @@ input[type="button" i], input[type="submit" i], input[type="reset" i], input[typ
 
 .wrap,.video_area,.main_frame {position:absolute;top:0;right:0;bottom:0;left:0;}
 .video_area {position:relative;height:100%;box-sizing:border-box;background-color:#000}
-.video_area .user {overflow:hidden;position:absolute;top:10px;left:10px;width:90%;text-shadow:2px 2px red;font-size:14px;text-align:left;text-overflow:ellipsis;white-space:nowrap;color:#fff;z-index:100;}
+.video_area .user {overflow:hidden;position:absolute;bottom:10px;left:0;right:0;display:inline-block;text-align:center;z-index:100;}
+.video_area .user .name {overflow:hidden;display:inline-block;max-width:80%;margin:0 10px;padding:2px 10px;text-align:center;border-radius:20px;font-size:14px;text-align:left;text-overflow:ellipsis;white-space:nowrap;color:#fff;
+	background: rgba(147,206,222,1);
+	background: -moz-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(147,206,222,1)), color-stop(41%, rgba(117,189,209,1)), color-stop(100%, rgba(73,165,191,1)));
+	background: -webkit-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+	background: -o-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+	background: -ms-linear-gradient(left, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+	background: linear-gradient(to right, rgba(147,206,222,1) 0%, rgba(117,189,209,1) 41%, rgba(73,165,191,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#93cede', endColorstr='#49a5bf', GradientType=1 );
+}
+
 .main_frame {}
-.main_frame .inbx {position:relative;height:100%;margin:0 auto;}
+.main_frame .inbx {position:relative;width:75%;height:100%;margin:0 auto;}
+.main_frame .user {top:10px;}
+
 .sub_frame {position:absolute;bottom:20px;left:0;right:0;padding:0 20px;text-align:center;font-size:0;}
-.sub_frame .item {position:relative;display:inline-block;width:20%;max-width:200px;height:150px;}
+.sub_frame .item {position:relative;display:inline-block;width:20%;max-width:200px;height:150px;z-index:200;}
 .sub_frame .item .inbx {margin:0 10px;}
 .sub_frame .btn_arrow {position:absolute;top:0;height:100%;}
 .sub_frame .btn_prev {left:0;}
 .sub_frame .btn_next {right:0;}
-
-
 
 
 
