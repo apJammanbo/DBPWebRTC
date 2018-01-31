@@ -10,10 +10,10 @@ function resolveURL(url) {
 
 // Please use HTTPs on non-localhost domains.
 var isLocal = false;
-var isUseHTTPs = false;
+var isUseHTTPs = true;
 
-// var port = 443;
-var port = process.env.PORT || 9001;
+var port = 443;
+//var port = process.env.PORT || 443;
 
 try {
     process.argv.forEach(function(val, index, array) {
@@ -31,8 +31,8 @@ var path = require('path');
 // see how to use a valid certificate:
 // https://github.com/muaz-khan/WebRTC-Experiment/issues/62
 var options = {
-    key: fs.readFileSync(path.join(__dirname, resolveURL('fake-keys/privatekey.pem'))),
-    cert: fs.readFileSync(path.join(__dirname, resolveURL('fake-keys/certificate.pem')))
+    key: fs.readFileSync(path.join(__dirname, resolveURL('fake-keys/STAR.wehago.com.key'))),
+    cert: fs.readFileSync(path.join(__dirname, resolveURL('fake-keys/STAR.wehago.com.crt')))
 };
 
 // force auto reboot on failures
@@ -43,7 +43,7 @@ var autoRebootServerOnFailure = false;
 try {
     var config = require(resolveURL('./config.json'));
 
-    if ((config.port || '').toString() !== '9001') {
+    if ((config.port || '').toString() !== '443') {
         port = parseInt(config.port);
     }
 
@@ -228,7 +228,7 @@ function runServer() {
     app.on('error', function(e) {
         if (e.code == 'EADDRINUSE') {
             if (e.address === '0.0.0.0') {
-                e.address = isLocal ? 'localhost' : '10.70.205.87';
+                e.address = isLocal ? 'localhost' : '14.41.55.87';
             }
 
             var socketURL = (isUseHTTPs ? 'https' : 'http') + '://' + e.address + ':' + e.port + '/';
@@ -238,7 +238,7 @@ function runServer() {
             console.log('\x1b[31m%s\x1b[0m ', socketURL + ' is already in use. Please kill below processes using "kill PID".');
             console.log('------------------------------');
 
-            foo = new cmd_exec('lsof', ['-n', '-i4TCP:9001'],
+            foo = new cmd_exec('lsof', ['-n', '-i4TCP:443'],
                 function(me, data) {
                     me.stdout += data.toString();
                 },
@@ -255,7 +255,7 @@ function runServer() {
         var addr = app.address();
 
         if (addr.address === '0.0.0.0') {
-            addr.address = isLocal ? 'localhost' : '10.70.205.87';
+            addr.address = isLocal ? 'localhost' : '14.41.55.87';
         }
 
         var domainURL = (isUseHTTPs ? 'https' : 'http') + '://' + addr.address + ':' + addr.port + '/';
@@ -273,7 +273,7 @@ function runServer() {
         console.log('Your web-browser (HTML file) MUST set this line:');
         console.log('\x1b[31m%s\x1b[0m ', 'connection.socketURL = "' + domainURL + '";');
 
-        if ((addr.address = isLocal ? 'localhost' : '10.70.205.87') != 'localhost' && !isUseHTTPs) {
+        if ((addr.address = isLocal ? 'localhost' : '14.41.55.87') != 'localhost' && !isUseHTTPs) {
             console.log('Warning:');
             console.log('\x1b[31m%s\x1b[0m ', 'Please set isUseHTTPs=true to make sure audio,video and screen demos can work on Google Chrome as well.');
         }
