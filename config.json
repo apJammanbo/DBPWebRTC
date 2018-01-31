@@ -1,5 +1,5 @@
 {
-  "socketURL": "/",
+  "socketURL": "https://signal.wehago.com/",
   "socketMessageEvent": "RTCMultiConnection-Message",
   "socketCustomEvent": "RTCMultiConnection-Custom-Message",
   "port": "443",

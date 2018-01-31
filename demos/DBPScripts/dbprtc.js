@@ -15,7 +15,7 @@ window.onload = function () {
 var connection = new RTCMultiConnection();
 
 // by default, socket.io server is assumed to be deployed on your own URL
-connection.socketURL = '/';
+connection.socketURL = 'https://signal.wehago.com/';
 connection.socketMessageEvent = 'audio-video-file-chat-demo';
 
 connection.session = {
